@@ -52,7 +52,7 @@ module SidekiqAlive
     end
 
     def current_queue
-      "#{config.queue_prefix}-#{hostname}"
+      "#{config.queue_prefix}" #-#{hostname}"
     end
 
     def register_current_instance
