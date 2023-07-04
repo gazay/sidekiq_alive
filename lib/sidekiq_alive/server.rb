@@ -30,6 +30,7 @@ module SidekiqAlive
       end
 
       def call(env)
+        SidekiqAlive.logger.info("SidekiqAlive request: #{env["REQUEST_METHOD"]} #{env["PATH_INFO"]}")
         if Rack::Request.new(env).path != path
           [404, {}, ["Not found"]]
         elsif SidekiqAlive.alive?
