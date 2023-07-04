@@ -26,7 +26,7 @@ module SidekiqAlive
       @port = ENV.fetch("SIDEKIQ_ALIVE_PORT", 7433)
       @path = ENV.fetch("SIDEKIQ_ALIVE_PATH", "/")
       @liveness_key = "SIDEKIQ::LIVENESS_PROBE_TIMESTAMP"
-      @time_to_live = 1 * 60
+      @time_to_live = 10 * 60
       @callback = proc {}
       @registered_instance_key = "SIDEKIQ_REGISTERED_INSTANCE"
       @queue_prefix = :"sidekiq-alive"

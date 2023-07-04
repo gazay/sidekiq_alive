@@ -14,7 +14,7 @@ module SidekiqAlive
       # Writes the liveness in Redis
       write_living_probe
       # schedules next living probe
-      SidekiqAlive.logger.info("Scheduling next living probe in #{config.time_to_live} seconds")
+      SidekiqAlive.logger.info("Scheduling next living probe in #{(config.time_to_live / 2).round} seconds")
       self.class.perform_in(config.time_to_live / 2, current_hostname)
     end
 
