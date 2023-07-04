@@ -7,6 +7,12 @@ module SidekiqAlive
 
     # Passing the hostname argument it's only for debugging enqueued jobs
     def perform(_hostname = SidekiqAlive.hostname)
+      if _hostname != current_hostname
+        SidekiqAlive.logger.info("Wrong sidekiq alive instance, rescheduling..")
+        self.class.perform_async(current_hostname)
+        return
+      end
+
       SidekiqAlive.logger.info("Performing SidekiqAlive::Worker for #{current_hostname}")
       # Checks if custom liveness probe passes should fail or return false
       return unless config.custom_liveness_probe.call
