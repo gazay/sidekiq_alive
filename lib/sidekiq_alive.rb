@@ -27,6 +27,7 @@ module SidekiqAlive
 
           logger.info(startup_info)
 
+          purge_pending_jobs
           register_current_instance
           store_alive_key
           # Passing the hostname argument it's only for debugging enqueued jobs

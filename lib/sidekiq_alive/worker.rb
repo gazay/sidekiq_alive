@@ -25,6 +25,8 @@ module SidekiqAlive
     end
 
     def write_living_probe
+      # Purge extra and old jobs
+      SidekiqAlive.purge_pending_jobs
       # Write liveness probe
       SidekiqAlive.store_alive_key
       # Increment ttl for current registered instance
